@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#" id="road">Road Transport</a></li>
+    <li><a href="#" id="air">Air Freight</a></li>
+    <li><a href="#" id="sea">Sea Freight</a></li>
+</ul>
+
+<div id="contentContainer" style="background-color: white; padding: 20px; margin: 10px;">
+    @Html.Action("RoadTransportation")
+</div>
+
+<script>
+    $(function () {
+        //http://api.jquery.com/jquery.ajax/
+        $('#air').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("AirTransportation")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+        $('#sea').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("SeaTransportation")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+        $('#road').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("RoadTransportation")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+    })
+</script>
+

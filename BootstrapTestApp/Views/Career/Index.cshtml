@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#" id="market">Marketing</a></li>
+    <li><a href="#" id="sales">Sales</a></li>
+    <li><a href="#" id="finance">Accounting</a></li>
+</ul>
+
+<div id="contentContainer" style="background-color: white; padding: 20px; margin: 10px;">
+    @Html.Action("MarketingOpenPositions")
+</div>
+
+<script>
+    $(function () {
+        //http://api.jquery.com/jquery.ajax/
+        $('#sales').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("SalesOpenPositions")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+        $('#finance').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("AccountingOpenPositions")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+        $('#market').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("MarketingOpenPositions")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+    })
+</script>
+

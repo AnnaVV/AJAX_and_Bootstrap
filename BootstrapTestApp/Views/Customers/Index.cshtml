@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Our Customers</h2>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#" id="niko">NIKO</a></li>
+    <li><a href="#" id="cola">Coca-Cola</a></li>
+    <li><a href="#" id="nestle">Nestle</a></li>
+</ul>
+
+<div id="contentContainer" style="background-color: white; padding: 20px; margin: 10px;">
+    @Html.Action("NikoCompany")
+</div>
+
+<script>
+    $(function () {
+        //http://api.jquery.com/jquery.ajax/
+        $('#cola').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("CocaColaCompany")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+        $('#nestle').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("NestleCompany")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+        $('#niko').click(function () {
+            $('.active').removeClass('active');
+            $(this).parent().addClass('active');
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: '@Url.Action("NikoCompany")'
+            }).done(function (result) {
+                $('#contentContainer').html(result);
+            });
+        });
+    })
+</script>
+
